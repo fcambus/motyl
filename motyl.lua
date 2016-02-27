@@ -121,6 +121,7 @@ data.page.title = "Archives"
 lfs.mkdir(data.site.destination .. "archives")
 output = lustache:render(templates.archives, data, templates)
 writeFile(data.site.destination .. "archives/index.html", output)
+status("Rendering archives/")
 
 -- Categories
 lfs.mkdir(data.site.destination .. "categories")
@@ -133,4 +134,5 @@ for category in pairs(data.site.categories) do
 
 	lfs.mkdir(data.site.destination .. "categories/" .. data.site.categoryMap[category])
 	writeFile(data.site.destination .. "categories/" .. data.site.categoryMap[category] .. "/index.html", output)
+	status("Rendering " .. "categories/" .. data.site.categoryMap[category])
 end
