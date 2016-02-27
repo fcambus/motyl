@@ -87,7 +87,7 @@ local function render(directory)
 			if extension == "md" then
 				path = file:match "(.*).md$"
 				data.page = loadJSON(directory .. "/" .. path .. ".json")
-				data.page.content = loadMD(directory .. "/" .. path .. ".md")
+				data.page.content = loadMD(directory .. "/" .. file)
 				data.page.url = path .. "/"
 
 				status("Rendering " .. data.page.url)
