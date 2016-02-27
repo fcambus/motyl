@@ -77,10 +77,11 @@ local function render(directory)
 
 			if extension == "md" then
 				path = file:match "(.*).md$"
-				print("Rendering : " .. file)
 				data.page = loadJSON(directory .. "/" .. path .. ".json")
 				data.page.content = loadMD(directory .. "/" .. path .. ".md")
 				data.page.url = path .. "/"
+
+				status("Rendering " .. data.page.url)
 
 				if directory == "posts" then 
 					table.insert(data.site.posts, data.page)
