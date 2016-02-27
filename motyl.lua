@@ -48,6 +48,10 @@ local function sortDates(a,b)
 	return a.date > b.date
 end
 
+local function status(message)
+	print("[" .. os.date("%X") .. "] " .. message)
+end
+
 -- Loading configuration
 local data = {}
 data.site = loadJSON("config.json")
