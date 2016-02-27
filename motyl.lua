@@ -58,6 +58,15 @@ data.site = loadJSON("config.json")
 data.site.datetime = os.date("%c")
 data.site.year = os.date('%Y')
 
+if arg[1] == "init" then
+	lfs.mkdir("deploy")
+	lfs.mkdir("pages")
+	lfs.mkdir("posts")
+	lfs.mkdir("static")
+
+	os.exit(1)
+end
+
 -- Loading templates
 local templates = {
 	header = readFile("templates/header.mustache"),
