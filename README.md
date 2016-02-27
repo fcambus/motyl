@@ -1,5 +1,7 @@
 ## Description
 
+Motyl is an opinionated static site generator written in Lua. It uses Mustache as templating system, and all content is written in Markdown.
+
 ## Requirements
 
 Motyl requires Lua and Make.
