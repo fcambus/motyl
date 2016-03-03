@@ -118,6 +118,8 @@ table.sort(data.site.posts, sortDates)
 
 -- Index 
 data.page.title = data.site.title
+data.page.description = data.site.description
+data.page.keywords = data.site.keywords
 data.page.url = nil
 output = lustache:render(templates.archives, data, templates)
 writeFile(data.site.destination .. "index.html", output)
