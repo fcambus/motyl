@@ -7,7 +7,7 @@
 # http://www.cambus.net/motyl/                                                #
 #                                                                             #
 # Created: 2016-02-16                                                         #
-# Last Updated: 2016-02-25                                                    #
+# Last Updated: 2016-03-03                                                    #
 #                                                                             #
 # Motyl is released under the BSD 3-Clause license.                           #
 # See LICENSE file for details.                                               #
@@ -116,12 +116,11 @@ render("pages")
 
 table.sort(data.site.posts, sortDates)
 
--- Archives
-data.page.title = "Archives"
-lfs.mkdir(data.site.destination .. "archives")
+-- Index 
+data.page.title = data.site.title
 output = lustache:render(templates.archives, data, templates)
-writeFile(data.site.destination .. "archives/index.html", output)
-status("Rendering archives/")
+writeFile(data.site.destination .. "index.html", output)
+status("Rendering index.html")
 
 -- Categories
 lfs.mkdir(data.site.destination .. "categories")
