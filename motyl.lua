@@ -103,6 +103,8 @@ local function render(directory)
 
 				lfs.mkdir(data.site.destination .. path)
 				writeFile(data.site.destination .. path .. "/index.html", output)
+
+				data.page = {}
 			end
 		end
 	end
