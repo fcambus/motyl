@@ -118,6 +118,7 @@ table.sort(data.site.posts, sortDates)
 
 -- Index 
 data.page.title = data.site.title
+data.page.url = nil
 output = lustache:render(templates.archives, data, templates)
 writeFile(data.site.destination .. "index.html", output)
 status("Rendering index.html")
@@ -131,6 +132,7 @@ for category in pairs(data.site.categories) do
 	table.sort(data.site.categories[category], sortDates)
 
 	data.page.title = category
+	data.page.url = categoryURL
 	data.site.posts = data.site.categories[category]
 	output = lustache:render(templates.archives, data, templates)
 
