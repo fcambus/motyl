@@ -126,6 +126,7 @@ data.page.keywords = data.site.keywords
 output = lustache:render(templates.archives, data, templates)
 writeFile(data.site.destination .. "index.html", output)
 status("Rendering index.html")
+data.page = {}
 
 -- Categories
 lfs.mkdir(data.site.destination .. "categories")
