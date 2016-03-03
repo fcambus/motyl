@@ -126,12 +126,15 @@ status("Rendering index.html")
 lfs.mkdir(data.site.destination .. "categories")
 
 for category in pairs(data.site.categories) do
+	local categoryURL = data.site.categoryMap[category] .. "/"
+
 	table.sort(data.site.categories[category], sortDates)
+
 	data.page.title = category
 	data.site.posts = data.site.categories[category]
 	output = lustache:render(templates.archives, data, templates)
 
-	lfs.mkdir(data.site.destination .. "categories/" .. data.site.categoryMap[category])
-	writeFile(data.site.destination .. "categories/" .. data.site.categoryMap[category] .. "/index.html", output)
-	status("Rendering " .. "categories/" .. data.site.categoryMap[category])
+	lfs.mkdir(data.site.destination .. "categories/" .. categoryURL)
+	writeFile(data.site.destination .. "categories/" .. categoryURL .. "index.html", output)
+	status("Rendering " .. categoryURL)
 end
