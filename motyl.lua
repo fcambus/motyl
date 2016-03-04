@@ -72,6 +72,7 @@ local templates = {
 	footer = readFile("templates/footer.mustache")
 }
 
+data.site.feed = {}
 data.site.posts = {}
 data.site.categories = {}
 
@@ -134,6 +135,10 @@ data.page.keywords = data.site.keywords
 output = renderTemplate(templates.archives, data, templates)
 writeFile(data.site.destination .. "index.html", output)
 status("Rendering index.html")
+
+for loop=1, 20 do
+	data.site.feed[loop] = data.site.posts[loop]
+end
 
 output = renderTemplate(templates.atom, data, templates)
 writeFile(data.site.destination .. "atom.xml", output)
