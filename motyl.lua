@@ -66,6 +66,7 @@ data.site.year = os.date('%Y')
 local templates = {
 	header = readFile("templates/header.mustache"),
 	archives = readFile("templates/archives.mustache"),
+	atom = readFile("templates/atom.mustache"),
 	pages = readFile("templates/page.mustache"),
 	posts = readFile("templates/post.mustache"),
 	footer = readFile("templates/footer.mustache")
@@ -122,7 +123,7 @@ render("pages")
 
 table.sort(data.site.posts, sortDates)
 
--- Index 
+-- Index + Feed
 data.page.title = data.site.title
 data.page.description = data.site.description
 data.page.keywords = data.site.keywords
@@ -130,6 +131,10 @@ data.page.keywords = data.site.keywords
 output = renderTemplate(templates.archives, data, templates)
 writeFile(data.site.destination .. "index.html", output)
 status("Rendering index.html")
+
+output = renderTemplate(templates.atom, data, templates)
+writeFile(data.site.destination .. "atom.xml", output)
+status("Rendering atom.xml")
 data.page = {}
 
 -- Categories
