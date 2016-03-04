@@ -141,7 +141,7 @@ for category in pairs(data.site.categories) do
 	table.sort(data.site.categories[category], sortDates)
 
 	data.page.title = category
-	data.page.url = categoryURL
+	data.page.url = "categories/" .. categoryURL
 	data.site.posts = data.site.categories[category]
 	output = renderTemplate(templates.archives, data, templates)
 
