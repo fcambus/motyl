@@ -7,7 +7,7 @@
 # http://www.cambus.net/motyl/                                                #
 #                                                                             #
 # Created: 2016-02-16                                                         #
-# Last Updated: 2016-03-03                                                    #
+# Last Updated: 2016-03-04                                                    #
 #                                                                             #
 # Motyl is released under the BSD 3-Clause license.                           #
 # See LICENSE file for details.                                               #
@@ -42,6 +42,10 @@ end
 
 local function loadMD(path)
 	return markdown(readFile(path))
+end
+
+local function renderTemplate(template, data, templates) 
+	return lustache:render(template, data, templates)
 end
 
 local function sortDates(a,b)
@@ -99,7 +103,7 @@ local function render(directory)
 					end
 				end
 
-				output = lustache:render(templates[directory], data, templates)
+				output = renderTemplate(templates[directory], data, templates)
 
 				lfs.mkdir(data.site.destination .. path)
 				writeFile(data.site.destination .. path .. "/index.html", output)
@@ -123,7 +127,7 @@ data.page.title = data.site.title
 data.page.description = data.site.description
 data.page.keywords = data.site.keywords
 
-output = lustache:render(templates.archives, data, templates)
+output = renderTemplate(templates.archives, data, templates)
 writeFile(data.site.destination .. "index.html", output)
 status("Rendering index.html")
 data.page = {}
@@ -139,7 +143,7 @@ for category in pairs(data.site.categories) do
 	data.page.title = category
 	data.page.url = categoryURL
 	data.site.posts = data.site.categories[category]
-	output = lustache:render(templates.archives, data, templates)
+	output = renderTemplate(templates.archives, data, templates)
 
 	lfs.mkdir(data.site.destination .. "categories/" .. categoryURL)
 	writeFile(data.site.destination .. "categories/" .. categoryURL .. "index.html", output)
