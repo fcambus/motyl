@@ -86,10 +86,10 @@ data.site.categories = {}
 local function render(directory)
 	for file in lfs.dir(directory) do
 		if file ~= "." and file ~= ".." then
-			extension = file:match "[^.]+$"
+			local extension = file:match "[^.]+$"
 
 			if extension == "md" then
-				path = file:match "(.*).md$"
+				local path = file:match "(.*).md$"
 				data.page = loadJSON(directory .. "/" .. path .. ".json")
 				data.page.content = loadMD(directory .. "/" .. file)
 				data.page.url = path .. "/"
