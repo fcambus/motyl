@@ -21,7 +21,7 @@ local lustache = require "lustache"
 local markdown = require "markdown"
 
 local function readFile(path)
-	local file = io.open(path, "rb")
+	local file = assert(io.open(path, "rb"))
 
 	local content = file:read "*all"
 	file:close()
@@ -30,7 +30,7 @@ local function readFile(path)
 end
 
 local function writeFile(path, data)
-	local file = io.open(path, "wb")
+	local file = assert(io.open(path, "wb"))
 
 	file:write(data)
 	file:close()
