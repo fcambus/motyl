@@ -7,7 +7,7 @@
 # http://www.cambus.net/motyl/                                                #
 #                                                                             #
 # Created: 2016-02-16                                                         #
-# Last Updated: 2016-03-04                                                    #
+# Last Updated: 2016-03-05                                                    #
 #                                                                             #
 # Motyl is released under the BSD 3-Clause license.                           #
 # See LICENSE file for details.                                               #
@@ -20,6 +20,7 @@ local lfs = require "lfs"
 local lustache = require "lustache"
 local markdown = require "markdown"
 
+-- Read data from file
 local function readFile(path)
 	local file = assert(io.open(path, "rb"))
 
@@ -29,6 +30,7 @@ local function readFile(path)
 	return content
 end
 
+-- Write data to file
 local function writeFile(path, data)
 	local file = assert(io.open(path, "wb"))
 
@@ -36,22 +38,27 @@ local function writeFile(path, data)
 	file:close()
 end
 
+-- Load JSON from file
 local function loadJSON(path)
 	return cjson.decode(readFile(path))
 end
 
+-- Load and process Markdown file 
 local function loadMD(path)
 	return markdown(readFile(path))
 end
 
+-- Render a mustache template
 local function renderTemplate(template, data, templates) 
 	return lustache:render(template, data, templates)
 end
 
+-- Sorting function to sort posts by date
 local function sortDates(a,b)
 	return a.date > b.date
 end
 
+-- Display status message
 local function status(message)
 	print("[" .. os.date("%X") .. "] " .. message)
 end
@@ -127,7 +134,7 @@ render("pages")
 
 table.sort(data.site.posts, sortDates)
 
--- Index + Feed
+-- Index
 data.page.title = data.site.title
 data.page.description = data.site.description
 data.page.keywords = data.site.keywords
@@ -136,6 +143,7 @@ output = renderTemplate(templates.archives, data, templates)
 writeFile(data.site.destination .. "index.html", output)
 status("Rendering index.html")
 
+-- Feed
 for loop=1, 20 do
 	data.site.feed[loop] = data.site.posts[loop]
 end
