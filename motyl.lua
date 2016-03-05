@@ -66,7 +66,6 @@ end
 -- Loading configuration
 local data = {}
 data.site = loadJSON("config.json")
-data.site.datetime = os.date("%c")
 data.site.year = os.date('%Y')
 
 -- Loading templates
