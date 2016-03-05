@@ -115,10 +115,8 @@ local function render(directory)
 					end
 				end
 
-				output = renderTemplate(templates[directory], data, templates)
-
 				lfs.mkdir(data.site.destination .. path)
-				writeFile(data.site.destination .. path .. "/index.html", output)
+				writeFile(data.site.destination .. path .. "/index.html", renderTemplate(templates[directory], data, templates))
 
 				data.page = {}
 			end
@@ -139,8 +137,7 @@ data.page.title = data.site.title
 data.page.description = data.site.description
 data.page.keywords = data.site.keywords
 
-output = renderTemplate(templates.archives, data, templates)
-writeFile(data.site.destination .. "index.html", output)
+writeFile(data.site.destination .. "index.html", renderTemplate(templates.archives, data, templates))
 status("Rendering index.html")
 
 -- Feed
@@ -148,8 +145,7 @@ for loop=1, 20 do
 	data.site.feed[loop] = data.site.posts[loop]
 end
 
-output = renderTemplate(templates.atom, data, templates)
-writeFile(data.site.destination .. "atom.xml", output)
+writeFile(data.site.destination .. "atom.xml", renderTemplate(templates.atom, data, templates))
 status("Rendering atom.xml")
 data.page = {}
 
@@ -164,9 +160,8 @@ for category in pairs(data.site.categories) do
 	data.page.title = category
 	data.page.url = "categories/" .. categoryURL
 	data.site.posts = data.site.categories[category]
-	output = renderTemplate(templates.archives, data, templates)
 
 	lfs.mkdir(data.site.destination .. "categories/" .. categoryURL)
-	writeFile(data.site.destination .. "categories/" .. categoryURL .. "index.html", output)
+	writeFile(data.site.destination .. "categories/" .. categoryURL .. "index.html", renderTemplate(templates.archives, data, templates))
 	status("Rendering " .. categoryURL)
 end
