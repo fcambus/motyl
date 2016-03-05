@@ -24,10 +24,10 @@ local markdown = require "markdown"
 local function readFile(path)
 	local file = assert(io.open(path, "rb"))
 
-	local content = file:read "*all"
+	local data = file:read "*all"
 	file:close()
 
-	return content
+	return data
 end
 
 -- Write data to file
