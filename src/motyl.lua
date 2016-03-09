@@ -70,12 +70,12 @@ data.site.year = os.date('%Y')
 
 -- Loading templates
 local templates = {
-	header = readFile("templates/header.mustache"),
-	archives = readFile("templates/archives.mustache"),
-	atom = readFile("templates/atom.mustache"),
-	pages = readFile("templates/page.mustache"),
-	posts = readFile("templates/post.mustache"),
-	footer = readFile("templates/footer.mustache")
+	header = readFile("themes/templates/header.mustache"),
+	archives = readFile("themes/templates/archives.mustache"),
+	atom = readFile("themes/templates/atom.mustache"),
+	pages = readFile("themes/templates/page.mustache"),
+	posts = readFile("themes/templates/post.mustache"),
+	footer = readFile("themes/templates/footer.mustache")
 }
 
 data.site.feed = {}
