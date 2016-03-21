@@ -114,8 +114,8 @@ local function render(directory)
 					end
 				end
 
-				lfs.mkdir(data.site.destination .. path)
-				writeFile(data.site.destination .. path .. "/index.html", renderTemplate(templates[directory], data, templates))
+				lfs.mkdir("deploy/" .. path)
+				writeFile("deploy/" .. path .. "/index.html", renderTemplate(templates[directory], data, templates))
 
 				data.page = {}
 			end
@@ -124,7 +124,7 @@ local function render(directory)
 end
 
 -- Render posts and pages
-lfs.mkdir(data.site.destination)
+lfs.mkdir("deploy")
 
 render("posts")
 render("pages")
@@ -136,7 +136,7 @@ data.page.title = data.site.title
 data.page.description = data.site.description
 data.page.keywords = data.site.keywords
 
-writeFile(data.site.destination .. "index.html", renderTemplate(templates.archives, data, templates))
+writeFile("deploy/index.html", renderTemplate(templates.archives, data, templates))
 status("Rendering index.html")
 
 -- Feed
@@ -144,12 +144,12 @@ for loop=1, 20 do
 	data.site.feed[loop] = data.site.posts[loop]
 end
 
-writeFile(data.site.destination .. "atom.xml", renderTemplate(templates.atom, data, templates))
+writeFile("deploy/atom.xml", renderTemplate(templates.atom, data, templates))
 status("Rendering atom.xml")
 data.page = {}
 
 -- Categories
-lfs.mkdir(data.site.destination .. "categories")
+lfs.mkdir("deploy/categories")
 
 for category in pairs(data.site.categories) do
 	local categoryURL = data.site.categoryMap[category] .. "/"
@@ -160,7 +160,7 @@ for category in pairs(data.site.categories) do
 	data.page.url = "categories/" .. categoryURL
 	data.site.posts = data.site.categories[category]
 
-	lfs.mkdir(data.site.destination .. "categories/" .. categoryURL)
-	writeFile(data.site.destination .. "categories/" .. categoryURL .. "index.html", renderTemplate(templates.archives, data, templates))
+	lfs.mkdir("deploy/categories/" .. categoryURL)
+	writeFile("deploy/categories/" .. categoryURL .. "index.html", renderTemplate(templates.archives, data, templates))
 	status("Rendering " .. categoryURL)
 end
