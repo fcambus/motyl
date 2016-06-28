@@ -1,0 +1,29 @@
+{
+  "author": "Frederic Cambus",
+  "copyright": "2016",
+  "title": "Opinionated static site generator",
+  "description": "Motyl, an opinionated static site generator written in Lua.",
+  "keywords": "static, site, generator, ssg, motyl, lua",
+  "name": "Motyl",
+
+  "url": "http://www.cambus.net/motyl/",
+
+  "pages": [
+    {
+      "title": "About",
+      "url": "/about/"
+    }, {
+      "title": "&middot; Archives",
+      "url": "/"
+    }, {
+      "title": "&middot; RSS",
+      "url": "/atom.xml"
+    }
+  ],
+
+  "categoryMap": {
+    "Lua": "lua",
+    "News": "news",
+    "Miscellaneous": "miscellaneous"
+  }
+}
