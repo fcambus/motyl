@@ -7,7 +7,7 @@
 # http://www.cambus.net/motyl/                                                #
 #                                                                             #
 # Created: 2016-02-16                                                         #
-# Last Updated: 2016-06-28                                                    #
+# Last Updated: 2016-07-09                                                    #
 #                                                                             #
 # Motyl is released under the BSD 3-Clause license.                           #
 # See LICENSE file for details.                                               #
@@ -65,6 +65,7 @@ end
 
 -- Loading configuration
 local data = {}
+data.version = "Motyl 1.00"
 data.site = loadJSON("motyl.conf")
 data.site.year = os.date('%Y')
 
