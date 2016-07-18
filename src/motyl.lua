@@ -43,13 +43,13 @@ local function loadJSON(path)
 	return cjson.decode(readFile(path))
 end
 
--- Load and process Markdown file 
+-- Load and process Markdown file
 local function loadMD(path)
 	return markdown(readFile(path))
 end
 
 -- Render a mustache template
-local function renderTemplate(template, data, templates) 
+local function renderTemplate(template, data, templates)
 	return lustache:render(template, data, templates)
 end
 
