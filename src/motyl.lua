@@ -7,9 +7,9 @@
 # http://www.cambus.net/motyl/                                                #
 #                                                                             #
 # Created: 2016-02-16                                                         #
-# Last Updated: 2016-07-09                                                    #
+# Last Updated: 2016-07-18                                                    #
 #                                                                             #
-# Motyl is released under the BSD 3-Clause license.                           #
+# Motyl is released under the BSD 2-Clause license.                           #
 # See LICENSE file for details.                                               #
 #                                                                             #
 ###############################################################################

@@ -38,7 +38,7 @@ Alternatively, those modules can be installed directly using binary packages.
 
 ## License
 
-Motyl is released under the BSD 3-Clause license. See `LICENSE` file
+Motyl is released under the BSD 2-Clause license. See `LICENSE` file
 for details.
 
 ## Author
