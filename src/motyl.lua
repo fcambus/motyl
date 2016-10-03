@@ -7,7 +7,7 @@
 # http://www.cambus.net/motyl/                                                #
 #                                                                             #
 # Created: 2016-02-16                                                         #
-# Last Updated: 2016-07-18                                                    #
+# Last Updated: 2016-10-03                                                    #
 #                                                                             #
 # Motyl is released under the BSD 2-Clause license.                           #
 # See LICENSE file for details.                                               #
@@ -126,13 +126,12 @@ end
 
 -- Render posts and pages
 lfs.mkdir("deploy")
-
 render("posts")
 render("pages")
 
+-- Index
 table.sort(data.site.posts, sortDates)
 
--- Index
 data.page.title = data.site.title
 data.page.description = data.site.description
 data.page.keywords = data.site.keywords
