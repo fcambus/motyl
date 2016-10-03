@@ -22,16 +22,16 @@ Motyl requires Lua 5.1+ and Make.
 
 Motyl requires the following Lua modules :
 
-- Lua CJSON
 - LuaFileSystem
-- Lustache
-- Markdown
+- lustache
+- lyaml
+- markdown
 
 Installing via LuaRocks :
 
-	luarocks install lua-cjson
 	luarocks install luafilesystem
 	luarocks install lustache
+	luarocks install lyaml
 	luarocks install markdown
 
 Alternatively, those modules can be installed directly using binary packages.

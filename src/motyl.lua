@@ -15,8 +15,8 @@
 ###############################################################################
 ]]--
 
-local cjson = require "cjson"
 local lfs = require "lfs"
+local lyaml = require "lyaml"
 local lustache = require "lustache"
 local markdown = require "markdown"
 
@@ -38,9 +38,9 @@ local function writeFile(path, data)
 	file:close()
 end
 
--- Load JSON from file
-local function loadJSON(path)
-	return cjson.decode(readFile(path))
+-- Load YAML from file
+local function loadYAML(path)
+	return lyaml.load(readFile(path))
 end
 
 -- Load and process Markdown file
@@ -66,7 +66,7 @@ end
 -- Loading configuration
 local data = {}
 data.version = "Motyl 1.00"
-data.site = loadJSON("motyl.conf")
+data.site = loadYAML("motyl.conf")
 
 -- Loading templates
 local templates = {
@@ -89,7 +89,7 @@ local function render(directory)
 
 			if extension == "md" then
 				local path = file:match "(.*).md$"
-				data.page = loadJSON(directory .. "/" .. path .. ".json")
+				data.page = loadYAML(directory .. "/" .. path .. ".yaml")
 				data.page.content = loadMD(directory .. "/" .. file)
 				data.page.url = path .. "/"
 
