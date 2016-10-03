@@ -67,7 +67,6 @@ end
 local data = {}
 data.version = "Motyl 1.00"
 data.site = loadJSON("motyl.conf")
-data.site.year = os.date('%Y')
 
 -- Loading templates
 local templates = {
