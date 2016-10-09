@@ -7,7 +7,7 @@
 # http://www.cambus.net/motyl/                                                #
 #                                                                             #
 # Created: 2016-02-16                                                         #
-# Last Updated: 2016-10-03                                                    #
+# Last Updated: 2016-10-09                                                    #
 #                                                                             #
 # Motyl is released under the BSD 2-Clause license.                           #
 # See LICENSE file for details.                                               #
@@ -17,8 +17,8 @@
 
 local lfs = require "lfs"
 local lyaml = require "lyaml"
+local lunamark = require "lunamark"
 local lustache = require "lustache"
-local markdown = require "markdown"
 
 -- Read data from file
 local function readFile(path)
@@ -45,7 +45,9 @@ end
 
 -- Load and process Markdown file
 local function loadMD(path)
-	return markdown(readFile(path))
+	local writer = lunamark.writer.html.new()
+	local parse = lunamark.reader.markdown.new(writer)
+	return parse(readFile(path))
 end
 
 -- Render a mustache template
