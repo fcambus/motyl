@@ -7,7 +7,7 @@
 # http://www.cambus.net/motyl/                                                #
 #                                                                             #
 # Created: 2016-02-16                                                         #
-# Last Updated: 2016-10-09                                                    #
+# Last Updated: 2016-10-13                                                    #
 #                                                                             #
 # Motyl is released under the BSD 2-Clause license.                           #
 # See LICENSE file for details.                                               #
@@ -46,7 +46,7 @@ end
 -- Load and process Markdown file
 local function loadMD(path)
 	local writer = lunamark.writer.html.new()
-	local parse = lunamark.reader.markdown.new(writer)
+	local parse = lunamark.reader.markdown.new(writer, { fenced_code_blocks = true })
 	return parse(readFile(path))
 end
 
