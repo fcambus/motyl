@@ -7,7 +7,7 @@
 # http://www.cambus.net/motyl/                                                #
 #                                                                             #
 # Created: 2016-02-16                                                         #
-# Last Updated: 2016-10-13                                                    #
+# Last Updated: 2016-11-25                                                    #
 #                                                                             #
 # Motyl is released under the BSD 2-Clause license.                           #
 # See LICENSE file for details.                                               #
@@ -19,6 +19,11 @@ local lfs = require "lfs"
 local lyaml = require "lyaml"
 local lunamark = require "lunamark"
 local lustache = require "lustache"
+
+-- Display status message
+local function status(message)
+	print("[" .. os.date("%X") .. "] " .. message)
+end
 
 -- Read data from file
 local function readFile(path)
@@ -33,6 +38,7 @@ end
 -- Write data to file
 local function writeFile(path, data)
 	local file = assert(io.open(path, "wb"))
+	status("Rendering " .. path)
 
 	file:write(data)
 	file:close()
@@ -58,11 +64,6 @@ end
 -- Sorting function to sort posts by date
 local function sortDates(a,b)
 	return a.date > b.date
-end
-
--- Display status message
-local function status(message)
-	print("[" .. os.date("%X") .. "] " .. message)
 end
 
 -- Loading configuration
@@ -94,8 +95,6 @@ local function render(directory)
 				data.page = loadYAML(directory .. "/" .. path .. ".yaml")
 				data.page.content = loadMD(directory .. "/" .. file)
 				data.page.url = path .. "/"
-
-				status("Rendering " .. data.page.url)
 
 				if directory == "posts" then 
 					local year, month, day, hour, min = data.page.date:match("(%d+)%-(%d+)%-(%d+) (%d+)%:(%d+)")
@@ -138,7 +137,6 @@ data.page.description = data.site.description
 data.page.keywords = data.site.keywords
 
 writeFile("deploy/index.html", renderTemplate(templates.archives, data, templates))
-status("Rendering index.html")
 
 -- Feed
 for loop=1, 20 do
@@ -146,7 +144,6 @@ for loop=1, 20 do
 end
 
 writeFile("deploy/atom.xml", renderTemplate(templates.atom, data, templates))
-status("Rendering atom.xml")
 data.page = {}
 
 -- Categories
@@ -163,5 +160,4 @@ for category in pairs(data.site.categories) do
 
 	lfs.mkdir("deploy/categories/" .. categoryURL)
 	writeFile("deploy/categories/" .. categoryURL .. "index.html", renderTemplate(templates.archives, data, templates))
-	status("Rendering " .. categoryURL)
 end
