@@ -1,4 +1,4 @@
-default :
+default:
 	@rm -rf deploy/
 	@motyl
 	@echo [`date +"%T"`] Copying assets and static files
@@ -6,5 +6,5 @@ default :
 	@cp -r static/* deploy/
 	@echo [`date +"%T"`] Done
 
-clean :
+clean:
 	@rm -rf deploy

@@ -20,14 +20,14 @@ Motyl requires Lua 5.1+ and Make.
 
 ### Lua modules
 
-Motyl requires the following Lua modules :
+Motyl requires the following Lua modules:
 
 - LuaFileSystem
 - lunamark
 - lustache
 - lyaml
 
-Installing via LuaRocks :
+Installing via LuaRocks:
 
 	luarocks install luafilesystem
 	luarocks install lunamark
@@ -47,7 +47,7 @@ for details.
 
 ## Author
 
-Motyl is developed by Frederic Cambus
+Motyl is developed by Frederic Cambus.
 
 - Site : http://www.cambus.net
 - Twitter: http://twitter.com/fcambus

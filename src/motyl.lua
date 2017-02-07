@@ -96,7 +96,7 @@ local function render(directory)
 				data.page.content = loadMD(directory .. "/" .. file)
 				data.page.url = path .. "/"
 
-				if directory == "posts" then 
+				if directory == "posts" then
 					local year, month, day, hour, min = data.page.date:match("(%d+)%-(%d+)%-(%d+) (%d+)%:(%d+)")
 					data.page.datetime = os.date("%c", os.time{year=year, month=month, day=day, hour=hour, min=min})
 
