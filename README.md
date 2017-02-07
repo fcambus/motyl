@@ -49,11 +49,11 @@ for details.
 
 Motyl is developed by Frederic Cambus.
 
-- Site : http://www.cambus.net
-- Twitter: http://twitter.com/fcambus
+- Site: https://www.cambus.net
+- Twitter: https://twitter.com/fcambus
 
 ## Resources
 
-Project Homepage : http://www.cambus.net/motyl/
+Project Homepage: https://www.cambus.net/motyl/
 
-GitHub : https://github.com/fcambus/motyl
+GitHub: https://github.com/fcambus/motyl

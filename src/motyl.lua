@@ -4,7 +4,7 @@
 #                                                                             #
 # Motyl                                                                       #
 # Copyright (c) 2016, Frederic Cambus                                         #
-# http://www.cambus.net/motyl/                                                #
+# https://www.cambus.net/motyl/                                               #
 #                                                                             #
 # Created: 2016-02-16                                                         #
 # Last Updated: 2016-11-25                                                    #
