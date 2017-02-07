@@ -20,21 +20,25 @@ Motyl requires Lua 5.1+ and Make.
 
 ### Lua modules
 
-Motyl requires the following Lua modules :
+Motyl requires the following Lua modules:
 
-- Lua CJSON
 - LuaFileSystem
-- Lustache
-- Markdown
+- lunamark
+- lustache
+- lyaml
 
-Installing via LuaRocks :
+Installing via LuaRocks:
 
-	luarocks install lua-cjson
 	luarocks install luafilesystem
+	luarocks install lunamark
 	luarocks install lustache
-	luarocks install markdown
+	luarocks install lyaml
 
 Alternatively, those modules can be installed directly using binary packages.
+
+## Installation
+
+## Usage
 
 ## License
 
@@ -43,13 +47,13 @@ for details.
 
 ## Author
 
-Motyl is developed by Frederic Cambus
+Motyl is developed by Frederic Cambus.
 
-- Site : http://www.cambus.net
-- Twitter: http://twitter.com/fcambus
+- Site: https://www.cambus.net
+- Twitter: https://twitter.com/fcambus
 
 ## Resources
 
-Project Homepage : http://www.cambus.net/motyl/
+Project Homepage: https://www.cambus.net/motyl/
 
-GitHub : https://github.com/fcambus/motyl
+GitHub: https://github.com/fcambus/motyl
