@@ -92,7 +92,7 @@ local function render(directory)
 			if extension == "md" then
 				local path = file:match "(.*).md$"
 				data.page = loadYAML(directory .. "/" .. path .. ".yaml")
-				data.page.content = loadMD(directory .. "/" .. file)
+				data.page.content = lustache:render(loadMD(directory .. "/" .. file), data)
 				if data.page.url == nil then
 					data.page.url = path .. "/"
 				end
