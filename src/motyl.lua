@@ -72,6 +72,7 @@ data.site = loadYAML("motyl.conf")
 
 -- Loading templates
 local templates = {
+	categories = readFile("themes/templates/categories.mustache"),
 	header = readFile("themes/templates/header.mustache"),
 	atom = readFile("themes/templates/atom.mustache"),
 	pages = readFile("themes/templates/page.mustache"),
@@ -158,6 +159,6 @@ for category in pairs(data.site.categories) do
 	data.site.posts = data.site.categories[category]
 
 	lfs.mkdir("deploy/categories/" .. categoryURL)
-	writeFile("deploy/categories/" .. categoryURL .. "index.html", renderTemplate(templates.archives, data, templates))
+	writeFile("deploy/categories/" .. categoryURL .. "index.html", renderTemplate(templates.categories, data, templates))
 	status("Rendering " .. categoryURL)
 end
