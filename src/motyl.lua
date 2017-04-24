@@ -73,7 +73,6 @@ data.site = loadYAML("motyl.conf")
 -- Loading templates
 local templates = {
 	header = readFile("themes/templates/header.mustache"),
-	archives = readFile("themes/templates/archives.mustache"),
 	atom = readFile("themes/templates/atom.mustache"),
 	pages = readFile("themes/templates/page.mustache"),
 	posts = readFile("themes/templates/post.mustache"),
@@ -127,18 +126,15 @@ local function render(directory)
 	end
 end
 
--- Render posts and pages
+-- Render posts
 lfs.mkdir("deploy")
 render("posts")
-render("pages")
 
--- Index
+-- Sort post archives
 table.sort(data.site.posts, sortDates)
 
-data.page.title = "Archives"
-lfs.mkdir("deploy/archives")
-writeFile("deploy/archives/index.html", renderTemplate(templates.archives, data, templates))
-status("Rendering archives/")
+-- Renger pages
+render("pages")
 
 -- Feed
 for loop=1, 20 do
