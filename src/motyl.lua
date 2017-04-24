@@ -133,12 +133,10 @@ render("pages")
 -- Index
 table.sort(data.site.posts, sortDates)
 
-data.page.title = data.site.title
-data.page.description = data.site.description
-data.page.keywords = data.site.keywords
-
-writeFile("deploy/index.html", renderTemplate(templates.archives, data, templates))
-status("Rendering index.html")
+data.page.title = "Archives"
+lfs.mkdir("deploy/archives")
+writeFile("deploy/archives/index.html", renderTemplate(templates.archives, data, templates))
+status("Rendering archives/")
 
 -- Feed
 for loop=1, 20 do
