@@ -93,7 +93,9 @@ local function render(directory)
 				local path = file:match "(.*).md$"
 				data.page = loadYAML(directory .. "/" .. path .. ".yaml")
 				data.page.content = loadMD(directory .. "/" .. file)
-				data.page.url = path .. "/"
+				if data.page.url == nil then
+					data.page.url = path .. "/"
+				end
 
 				status("Rendering " .. data.page.url)
 
@@ -116,8 +118,8 @@ local function render(directory)
 					end
 				end
 
-				lfs.mkdir("deploy/" .. path)
-				writeFile("deploy/" .. path .. "/index.html", renderTemplate(templates[directory], data, templates))
+				lfs.mkdir("deploy/" .. data.page.url)
+				writeFile("deploy/" .. data.page.url .. "index.html", renderTemplate(templates[directory], data, templates))
 
 				data.page = {}
 			end
