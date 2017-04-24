@@ -7,7 +7,7 @@
 # https://www.cambus.net/motyl/                                               #
 #                                                                             #
 # Created: 2016-02-16                                                         #
-# Last Updated: 2017-04-20                                                    #
+# Last Updated: 2017-04-24                                                    #
 #                                                                             #
 # Motyl is released under the BSD 2-Clause license.                           #
 # See LICENSE file for details.                                               #
@@ -98,7 +98,7 @@ local function render(directory)
 
 				status("Rendering " .. data.page.url)
 
-				if directory == "posts" then 
+				if directory == "posts" then
 					local year, month, day, hour, min = data.page.date:match("(%d+)%-(%d+)%-(%d+) (%d+)%:(%d+)")
 					data.page.datetime = os.date("%c", os.time{year=year, month=month, day=day, hour=hour, min=min})
 
