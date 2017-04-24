@@ -138,7 +138,7 @@ table.sort(data.site.posts, sortDates)
 render("pages")
 
 -- Feed
-for loop=1, 20 do
+for loop=1, data.site.feedItems do
 	data.site.feed[loop] = data.site.posts[loop]
 end
 
