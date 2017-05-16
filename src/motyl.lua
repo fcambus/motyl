@@ -100,7 +100,7 @@ local function render(directory)
 
 				if directory == "posts" then
 					local year, month, day, hour, min = data.page.date:match("(%d+)%-(%d+)%-(%d+) (%d+)%:(%d+)")
-					data.page.datetime = os.date("%Y-%m-%dT%H:%M:%SZ", os.time{year=year, month=month, day=day, hour=hour, min=min})
+					data.page.datetime = os.date("%Y-%m-%dT%XZ", os.time{year=year, month=month, day=day, hour=hour, min=min})
 
 					table.insert(data.site.posts, data.page)
 
