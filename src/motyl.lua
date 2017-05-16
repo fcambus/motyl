@@ -68,6 +68,7 @@ end
 -- Loading configuration
 local data = {}
 data.version = "Motyl 1.00"
+data.updated = os.date("%Y-%m-%dT%XZ")
 data.site = loadYAML("motyl.conf")
 data.site.feed = {}
 data.site.posts = {}
