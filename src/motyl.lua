@@ -69,6 +69,9 @@ end
 local data = {}
 data.version = "Motyl 1.00"
 data.site = loadYAML("motyl.conf")
+data.site.feed = {}
+data.site.posts = {}
+data.site.categories = {}
 
 -- Loading templates
 local templates = {
@@ -79,10 +82,6 @@ local templates = {
 	posts = readFile("themes/templates/post.mustache"),
 	footer = readFile("themes/templates/footer.mustache")
 }
-
-data.site.feed = {}
-data.site.posts = {}
-data.site.categories = {}
 
 local function render(directory)
 	for file in lfs.dir(directory) do
