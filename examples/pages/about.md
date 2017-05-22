@@ -1,6 +1,6 @@
 ## Description
 
-Motyl is an opinionated static site generator written in Lua. It uses Mustache as templating system, and all content is written in Markdown.
+Motyl is an opinionated blog-aware static site generator written in Lua. It uses Mustache as templating system, and all content is written in Markdown.
 
 For the record, motyl means butterfly in Polish.
 
@@ -52,7 +52,5 @@ Motyl is developed by Frederic Cambus.
 - Site: https://www.cambus.net
 
 ## Resources
-
-Project Homepage: https://www.cambus.net/motyl/
 
 GitHub: https://github.com/fcambus/motyl
