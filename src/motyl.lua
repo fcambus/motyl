@@ -7,7 +7,7 @@
 # https://github.com/fcambus/motyl                                            #
 #                                                                             #
 # Created: 2016-02-16                                                         #
-# Last Updated: 2017-05-22                                                    #
+# Last Updated: 2017-08-07                                                    #
 #                                                                             #
 # Motyl is released under the BSD 2-Clause license.                           #
 # See LICENSE file for details.                                               #
@@ -118,8 +118,8 @@ local function render(directory)
 					end
 				end
 
-				lfs.mkdir("deploy/" .. data.page.url)
-				writeFile("deploy/" .. data.page.url .. "index.html", renderTemplate(templates[directory], data, templates))
+				lfs.mkdir("public/" .. data.page.url)
+				writeFile("public/" .. data.page.url .. "index.html", renderTemplate(templates[directory], data, templates))
 
 				data.page = {}
 			end
@@ -128,7 +128,7 @@ local function render(directory)
 end
 
 -- Render posts
-lfs.mkdir("deploy")
+lfs.mkdir("public")
 render("posts")
 
 -- Sort post archives
@@ -142,12 +142,12 @@ for loop=1, data.site.feedItems do
 	data.site.feed[loop] = data.site.posts[loop]
 end
 
-writeFile("deploy/atom.xml", renderTemplate(templates.atom, data, templates))
+writeFile("public/atom.xml", renderTemplate(templates.atom, data, templates))
 status("Rendering atom.xml")
 data.page = {}
 
 -- Categories
-lfs.mkdir("deploy/categories")
+lfs.mkdir("public/categories")
 
 for category in pairs(data.site.categories) do
 	local categoryURL = data.site.categoryMap[category] .. "/"
@@ -158,7 +158,7 @@ for category in pairs(data.site.categories) do
 	data.page.url = "categories/" .. categoryURL
 	data.site.posts = data.site.categories[category]
 
-	lfs.mkdir("deploy/categories/" .. categoryURL)
-	writeFile("deploy/categories/" .. categoryURL .. "index.html", renderTemplate(templates.categories, data, templates))
+	lfs.mkdir("public/categories/" .. categoryURL)
+	writeFile("public/categories/" .. categoryURL .. "index.html", renderTemplate(templates.categories, data, templates))
 	status("Rendering " .. categoryURL)
 end

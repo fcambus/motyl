@@ -1,10 +1,10 @@
 default:
-	@rm -rf deploy/
+	@rm -rf public/
 	@motyl
 	@echo [`date +"%T"`] Copying assets and static files
-	@cp -r themes/fonts themes/scripts themes/styles deploy/
-	@cp -r static/* deploy/
+	@cp -r themes/fonts themes/scripts themes/styles public/
+	@cp -r static/* public/
 	@echo [`date +"%T"`] Done
 
 clean:
-	@rm -rf deploy
+	@rm -rf public
