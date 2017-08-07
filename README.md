@@ -7,7 +7,7 @@ For the record, motyl means butterfly in Polish.
 
 ## Features
 
-- Small and easy to understand code (only 130 sloc)
+- Small and easy to understand code (only 131 sloc)
 - Minimal dependencies (only four Lua rocks)
 - Pages and posts written in Markdown
 - Templates are logic-less and use Mustache
@@ -37,9 +37,20 @@ Installing dependencies via LuaRocks:
 
 Alternatively, those modules can be installed directly using binary packages.
 
-## Installation
+## Configuration
+
+The 'examples' directory contains a sample site which can be used as a
+starting point.
+
+### Installing a theme
+
+Clone the [Chrysalide](https://github.com/fcambus/chrysalide) theme repository
+and place the files in the `themes` directory.
 
 ## Usage
+
+Simply run `make` to build the site, it will generate posts and pages into
+the `public` directory, and will also copy static assets.
 
 ## License
 
