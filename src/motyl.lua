@@ -3,11 +3,11 @@
 ###############################################################################
 #                                                                             #
 # Motyl                                                                       #
-# Copyright (c) 2016-2017, Frederic Cambus                                    #
+# Copyright (c) 2016-2018, Frederic Cambus                                    #
 # https://github.com/fcambus/motyl                                            #
 #                                                                             #
 # Created: 2016-02-16                                                         #
-# Last Updated: 2017-08-07                                                    #
+# Last Updated: 2018-01-08                                                    #
 #                                                                             #
 # Motyl is released under the BSD 2-Clause license.                           #
 # See LICENSE file for details.                                               #
