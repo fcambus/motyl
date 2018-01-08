@@ -108,7 +108,7 @@ local function render(directory)
 					data.page.categoryDisplay = {}
 
 					-- Populate category table
-					for i, category in ipairs(data.page.categories) do
+					for _, category in ipairs(data.page.categories) do
 						if not data.site.categories[category] then
 							data.site.categories[category] = {}
 						end
