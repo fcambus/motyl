@@ -7,7 +7,7 @@
 # https://github.com/fcambus/motyl                                            #
 #                                                                             #
 # Created: 2016-02-16                                                         #
-# Last Updated: 2018-01-08                                                    #
+# Last Updated: 2018-03-04                                                    #
 #                                                                             #
 # Motyl is released under the BSD 2-Clause license.                           #
 # See LICENSE file for details.                                               #
@@ -48,11 +48,6 @@ local function loadMD(path)
 	local writer = lunamark.writer.html.new()
 	local parse = lunamark.reader.markdown.new(writer, { fenced_code_blocks = true })
 	return parse(readFile(path))
-end
-
--- Render a mustache template
-local function renderTemplate(template, data, templates)
-	return lustache:render(template, data, templates)
 end
 
 -- Sorting function to sort posts by date
@@ -119,7 +114,7 @@ local function render(directory)
 				end
 
 				lfs.mkdir("public/" .. data.page.url)
-				writeFile("public/" .. data.page.url .. "index.html", renderTemplate(templates[directory], data, templates))
+				writeFile("public/" .. data.page.url .. "index.html", lustache:render(templates[directory], data, templates))
 
 				data.page = {}
 			end
@@ -142,7 +137,7 @@ for loop=1, data.site.feedItems do
 	data.site.feed[loop] = data.site.posts[loop]
 end
 
-writeFile("public/atom.xml", renderTemplate(templates.atom, data, templates))
+writeFile("public/atom.xml", lustache:render(templates.atom, data, templates))
 status("Rendering atom.xml")
 data.page = {}
 
@@ -159,6 +154,6 @@ for category in pairs(data.site.categories) do
 	data.site.posts = data.site.categories[category]
 
 	lfs.mkdir("public/categories/" .. categoryURL)
-	writeFile("public/categories/" .. categoryURL .. "index.html", renderTemplate(templates.categories, data, templates))
+	writeFile("public/categories/" .. categoryURL .. "index.html", lustache:render(templates.categories, data, templates))
 	status("Rendering " .. categoryURL)
 end
