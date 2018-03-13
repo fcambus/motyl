@@ -19,7 +19,7 @@ require 'yaml'
 
 # Load and process Markdown file
 def loadMD(path)
-  return Kramdown::Document.new(File.read(path)).to_html
+  return Kramdown::Document.new(File.read(path), syntax_highlighter: 'rouge').to_html
 end
 
 # Display status message
