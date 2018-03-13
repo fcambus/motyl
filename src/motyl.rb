@@ -57,9 +57,7 @@ def render(directory, templates, data)
       basename = File.basename(file, extension)
       data["page"] = YAML.load_file(directory + "/" + basename + ".yaml")
       data["page"]["content"] = Mustache.render(loadMD(directory + "/" + file), data)
-      if data["page"]["url"].nil?
-        data["page"]["url"] = basename + "/"
-      end
+      data["page"]["url"] ||= basename + "/"
 
       status("Rendering " + data["page"]["url"])
 
@@ -72,9 +70,7 @@ def render(directory, templates, data)
 
         # Populate category table
         data["page"]["categories"].each do |category|
-          if data["site"]["categories"][category].nil?
-            data["site"]["categories"][category] = []
-          end
+          data["site"]["categories"][category] ||= []
           data["site"]["categories"][category].push(data["page"])
           data["page"]["categoryDisplay"].push({ "category" => category, "url" => data["site"]["categoryMap"][category]})
         end
