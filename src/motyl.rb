@@ -19,12 +19,12 @@ require 'yaml'
 
 # Load and process Markdown file
 def loadMD(path)
-	return Kramdown::Document.new(File.read(path)).to_html
+  return Kramdown::Document.new(File.read(path)).to_html
 end
 
 # Display status message
 def status(message)
-	puts("[" + Time.now.strftime("%X") + "] " + message)
+  puts("[" + Time.now.strftime("%X") + "] " + message)
 end
 
 # Loading configuration
@@ -38,54 +38,54 @@ data["site"]["categories"] = {}
 
 # Loading templates
 templates = {
-	"categories" => File.read("themes/templates/categories.mustache"),
-	"atom" => File.read("themes/templates/atom.mustache"),
-	"pages" => File.read("themes/templates/page.mustache"),
-	"posts" => File.read("themes/templates/post.mustache")
+  "categories" => File.read("themes/templates/categories.mustache"),
+  "atom" => File.read("themes/templates/atom.mustache"),
+  "pages" => File.read("themes/templates/page.mustache"),
+  "posts" => File.read("themes/templates/post.mustache")
 }
 
 class Mustache
-	self.template_path = "themes/templates/"
+  self.template_path = "themes/templates/"
 end
 
 def render(directory, templates, data)
-	Dir.foreach(directory) do |file|
-		next if file == '.' or file == '..'
-		extension = File.extname(file)
+  Dir.foreach(directory) do |file|
+    next if file == '.' or file == '..'
+    extension = File.extname(file)
 
-		if extension == ".md"
-			basename = File.basename(file, extension)
-			data["page"] = YAML.load_file(directory + "/" + basename + ".yaml")
-			data["page"]["content"] = Mustache.render(loadMD(directory + "/" + file), data)
-			if data["page"]["url"].nil?
-				data["page"]["url"] = basename + "/"
-			end
+    if extension == ".md"
+      basename = File.basename(file, extension)
+      data["page"] = YAML.load_file(directory + "/" + basename + ".yaml")
+      data["page"]["content"] = Mustache.render(loadMD(directory + "/" + file), data)
+      if data["page"]["url"].nil?
+        data["page"]["url"] = basename + "/"
+      end
 
-			status("Rendering " + data["page"]["url"])
+      status("Rendering " + data["page"]["url"])
 
-			if directory == "posts" then
-				data["page"]["datetime"] = DateTime.parse(data["page"]["date"])
+      if directory == "posts" then
+        data["page"]["datetime"] = DateTime.parse(data["page"]["date"])
 
-				data["site"]["posts"].push(data["page"])
+        data["site"]["posts"].push(data["page"])
 
-				data["page"]["categoryDisplay"] = []
+        data["page"]["categoryDisplay"] = []
 
-				# Populate category table
-				data["page"]["categories"].each do |category|
-					if data["site"]["categories"][category].nil?
-						data["site"]["categories"][category] = []
-					end
-					data["site"]["categories"][category].push(data["page"])
-					data["page"]["categoryDisplay"].push({ "category" => category, "url" => data["site"]["categoryMap"][category]})
-				end
-			end
+        # Populate category table
+        data["page"]["categories"].each do |category|
+          if data["site"]["categories"][category].nil?
+            data["site"]["categories"][category] = []
+          end
+          data["site"]["categories"][category].push(data["page"])
+          data["page"]["categoryDisplay"].push({ "category" => category, "url" => data["site"]["categoryMap"][category]})
+        end
+      end
 
-			Dir.mkdir("public/" + data["page"]["url"]) unless Dir.exist?("public/" + data["page"]["url"])
-			File.write("public/" + data["page"]["url"] + "index.html", Mustache.render(templates[directory], data))
+      Dir.mkdir("public/" + data["page"]["url"]) unless Dir.exist?("public/" + data["page"]["url"])
+      File.write("public/" + data["page"]["url"] + "index.html", Mustache.render(templates[directory], data))
 
-			data["page"] = {}
-		end
-	end
+      data["page"] = {}
+    end
+  end
 end
 
 # Render posts
@@ -109,14 +109,14 @@ data["page"] = {}
 Dir.mkdir("public/categories") unless Dir.exist?("public/categories")
 
 data["site"]["categories"].keys.each do |category|
-	categoryURL = data["site"]["categoryMap"][category] + "/"
+  categoryURL = data["site"]["categoryMap"][category] + "/"
 
-	data["site"]["categories"][category] = data["site"]["categories"][category].sort { |a,b| b["date"] <=> a["date"] }
-	data["page"]["title"] = category
-	data["page"]["url"] = "categories/" + categoryURL
-	data["site"]["posts"] = data["site"]["categories"][category]
+  data["site"]["categories"][category] = data["site"]["categories"][category].sort { |a,b| b["date"] <=> a["date"] }
+  data["page"]["title"] = category
+  data["page"]["url"] = "categories/" + categoryURL
+  data["site"]["posts"] = data["site"]["categories"][category]
 
-	Dir.mkdir("public/categories/" + categoryURL) unless Dir.exist?("public/categories/" + categoryURL)
-	File.write("public/categories/" + categoryURL + "index.html", Mustache.render(templates["categories"], data))
-	status("Rendering " + categoryURL)
+  Dir.mkdir("public/categories/" + categoryURL) unless Dir.exist?("public/categories/" + categoryURL)
+  File.write("public/categories/" + categoryURL + "index.html", Mustache.render(templates["categories"], data))
+  status("Rendering " + categoryURL)
 end
