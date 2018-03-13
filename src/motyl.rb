@@ -32,9 +32,9 @@ data = {}
 data["version"] = "Motyl 1.00"
 data["updated"] = Time.now.strftime("%Y-%m-%dT%XZ")
 data["site"] = YAML.load_file("motyl.conf")
-data["site"]["feed"] = {}
-data["site"]["posts"] = []
-data["site"]["categories"] = {}
+data["feed"] = {}
+data["posts"] = []
+data["categories"] = {}
 
 # Loading templates
 templates = {
@@ -64,14 +64,14 @@ def render(directory, templates, data)
       if directory == "posts" then
         data["page"]["datetime"] = DateTime.parse(data["page"]["date"])
 
-        data["site"]["posts"].push(data["page"])
+        data["posts"].push(data["page"])
 
         data["page"]["categoryDisplay"] = []
 
         # Populate category table
         data["page"]["categories"].each do |category|
-          data["site"]["categories"][category] ||= []
-          data["site"]["categories"][category].push(data["page"])
+          data["categories"][category] ||= []
+          data["categories"][category].push(data["page"])
           data["page"]["categoryDisplay"].push({ "category" => category, "url" => data["site"]["categoryMap"][category]})
         end
       end
@@ -89,13 +89,13 @@ Dir.mkdir("public") unless Dir.exist?("public")
 render("posts", templates, data)
 
 # Sort post archives
-data["site"]["posts"].sort! { |a,b| b["date"] <=> a["date"] }
+data["posts"].sort! { |a,b| b["date"] <=> a["date"] }
 
 # Renger pages
 render("pages", templates, data)
 
 # Feed
-data["site"]["feed"] = data["site"]["posts"][0..20]
+data["feed"] = data["posts"][0..20]
 
 File.write("public/atom.xml", Mustache.render(templates["atom"], data))
 status("Rendering atom.xml")
@@ -104,13 +104,13 @@ data["page"] = {}
 # Categories
 Dir.mkdir("public/categories") unless Dir.exist?("public/categories")
 
-data["site"]["categories"].keys.each do |category|
+data["categories"].keys.each do |category|
   categoryURL = data["site"]["categoryMap"][category] + "/"
 
-  data["site"]["categories"][category].sort! { |a,b| b["date"] <=> a["date"] }
+  data["categories"][category].sort! { |a,b| b["date"] <=> a["date"] }
   data["page"]["title"] = category
   data["page"]["url"] = "categories/" + categoryURL
-  data["site"]["posts"] = data["site"]["categories"][category]
+  data["posts"] = data["categories"][category]
 
   Dir.mkdir("public/categories/" + categoryURL) unless Dir.exist?("public/categories/" + categoryURL)
   File.write("public/categories/" + categoryURL + "index.html", Mustache.render(templates["categories"], data))
