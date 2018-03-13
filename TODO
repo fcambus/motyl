@@ -1,1 +1,2 @@
 - Add 'motyl.1' and 'motyl.conf.5'
+- Drop dependency on Make?
