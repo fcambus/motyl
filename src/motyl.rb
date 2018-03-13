@@ -89,7 +89,7 @@ Dir.mkdir("public") unless Dir.exist?("public")
 render("posts", templates, data)
 
 # Sort post archives
-data["site"]["posts"] = data["site"]["posts"].sort { |a,b| b["date"] <=> a["date"] }
+data["site"]["posts"].sort! { |a,b| b["date"] <=> a["date"] }
 
 # Renger pages
 render("pages", templates, data)
@@ -107,7 +107,7 @@ Dir.mkdir("public/categories") unless Dir.exist?("public/categories")
 data["site"]["categories"].keys.each do |category|
   categoryURL = data["site"]["categoryMap"][category] + "/"
 
-  data["site"]["categories"][category] = data["site"]["categories"][category].sort { |a,b| b["date"] <=> a["date"] }
+  data["site"]["categories"][category].sort! { |a,b| b["date"] <=> a["date"] }
   data["page"]["title"] = category
   data["page"]["url"] = "categories/" + categoryURL
   data["site"]["posts"] = data["site"]["categories"][category]
