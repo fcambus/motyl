@@ -105,14 +105,14 @@ data["page"] = {}
 Dir.mkdir("public/categories") unless Dir.exist?("public/categories")
 
 data["categories"].keys.each do |category|
-  categoryURL = data["site"]["categoryMap"][category] + "/"
+  category_url = data["site"]["categoryMap"][category] + "/"
 
   data["categories"][category].sort! { |a,b| b["date"] <=> a["date"] }
   data["page"]["title"] = category
-  data["page"]["url"] = "categories/" + categoryURL
+  data["page"]["url"] = "categories/" + category_url
   data["posts"] = data["categories"][category]
 
-  Dir.mkdir("public/categories/" + categoryURL) unless Dir.exist?("public/categories/" + categoryURL)
-  File.write("public/categories/" + categoryURL + "index.html", Mustache.render(templates["categories"], data))
-  status("Rendering " + categoryURL)
+  Dir.mkdir("public/categories/" + category_url) unless Dir.exist?("public/categories/" + category_url)
+  File.write("public/categories/" + category_url + "index.html", Mustache.render(templates["categories"], data))
+  status("Rendering " + category_url)
 end
