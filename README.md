@@ -1,14 +1,14 @@
 ## Description
 
-Motyl is an opinionated blog-aware static site generator written in Lua.
+Motyl is an opinionated blog-aware static site generator written in Ruby.
 It uses Mustache as templating system, and all content is written in Markdown.
 
 For the record, motyl means butterfly in Polish.
 
 ## Features
 
-- Small and easy to understand code (only 131 sloc)
-- Minimal dependencies (only four Lua rocks)
+- Small and easy to understand code (only 94 sloc)
+- Minimal dependencies (only three gems)
 - Pages and posts written in Markdown
 - Templates are logic-less and use Mustache
 - Support for categories
@@ -17,23 +17,19 @@ For the record, motyl means butterfly in Polish.
 
 ## Requirements
 
-Motyl requires Lua 5.1+ and Make.
+Motyl requires Ruby and Make.
 
-### Lua modules
+### Ruby modules
 
-Motyl requires the following Lua modules:
+Motyl requires the following Ruby modules:
 
-- LuaFileSystem
-- lunamark
-- lustache
-- lyaml
+- kramdown
+- mustache
+- rouge
 
-Installing dependencies via LuaRocks:
+Installing dependencies via gem:
 
-	luarocks install luafilesystem
-	luarocks install lunamark
-	luarocks install lustache
-	luarocks install lyaml
+	gem install kramdown mustache rouge
 
 Alternatively, those modules can be installed directly using binary packages.
 
