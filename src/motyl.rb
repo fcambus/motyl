@@ -17,11 +17,6 @@ require 'kramdown'
 require 'mustache'
 require 'yaml'
 
-# Load YAML from file
-def loadYAML(path)
-	return YAML.load_file(path)
-end
-
 # Load and process Markdown file
 def loadMD(path)
 	return Kramdown::Document.new(File.read(path)).to_html
@@ -36,7 +31,7 @@ end
 data = {}
 data["version"] = "Motyl 1.00"
 data["updated"] = Time.now.strftime("%Y-%m-%dT%XZ")
-data["site"] = loadYAML("motyl.conf")
+data["site"] = YAML.load_file("motyl.conf")
 data["site"]["feed"] = {}
 data["site"]["posts"] = []
 data["site"]["categories"] = {}
@@ -60,7 +55,7 @@ def render(directory, templates, data)
 
 		if extension == ".md"
 			basename = File.basename(file, extension)
-			data["page"] = loadYAML(directory + "/" + basename + ".yaml")
+			data["page"] = YAML.load_file(directory + "/" + basename + ".yaml")
 			data["page"]["content"] = Mustache.render(loadMD(directory + "/" + file), data)
 			if data["page"]["url"].nil?
 				data["page"]["url"] = basename + "/"
