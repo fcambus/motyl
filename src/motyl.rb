@@ -17,16 +17,6 @@ require 'kramdown'
 require 'mustache'
 require 'yaml'
 
-# Read data from file
-def readFile(path)
-	return File.read(path)
-end
-
-# Write data to file
-def writeFile(path, data)
-	File.write(path, data)
-end
-
 # Load YAML from file
 def loadYAML(path)
 	return YAML.load_file(path)
@@ -34,7 +24,7 @@ end
 
 # Load and process Markdown file
 def loadMD(path)
-	return Kramdown::Document.new(readFile(path)).to_html
+	return Kramdown::Document.new(File.read(path)).to_html
 end
 
 # Display status message
@@ -53,10 +43,10 @@ data["site"]["categories"] = {}
 
 # Loading templates
 templates = {
-	"categories" => readFile("themes/templates/categories.mustache"),
-	"atom" => readFile("themes/templates/atom.mustache"),
-	"pages" => readFile("themes/templates/page.mustache"),
-	"posts" => readFile("themes/templates/post.mustache"),
+	"categories" => File.read("themes/templates/categories.mustache"),
+	"atom" => File.read("themes/templates/atom.mustache"),
+	"pages" => File.read("themes/templates/page.mustache"),
+	"posts" => File.read("themes/templates/post.mustache")
 }
 
 class Mustache
@@ -96,7 +86,7 @@ def render(directory, templates, data)
 			end
 
 			Dir.mkdir("public/" + data["page"]["url"]) unless Dir.exist?("public/" + data["page"]["url"])
-			writeFile("public/" + data["page"]["url"] + "index.html", Mustache.render(templates[directory], data))
+			File.write("public/" + data["page"]["url"] + "index.html", Mustache.render(templates[directory], data))
 
 			data["page"] = {}
 		end
@@ -116,7 +106,7 @@ render("pages", templates, data)
 # Feed
 data["site"]["feed"] = data["site"]["posts"][0..20]
 
-writeFile("public/atom.xml", Mustache.render(templates["atom"], data))
+File.write("public/atom.xml", Mustache.render(templates["atom"], data))
 status("Rendering atom.xml")
 data["page"] = {}
 
@@ -132,6 +122,6 @@ data["site"]["categories"].keys.each do |category|
 	data["site"]["posts"] = data["site"]["categories"][category]
 
 	Dir.mkdir("public/categories/" + categoryURL) unless Dir.exist?("public/categories/" + categoryURL)
-	writeFile("public/categories/" + categoryURL + "index.html", Mustache.render(templates["categories"], data))
+	File.write("public/categories/" + categoryURL + "index.html", Mustache.render(templates["categories"], data))
 	status("Rendering " + categoryURL)
 end
