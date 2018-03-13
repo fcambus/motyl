@@ -28,13 +28,13 @@ def status(message)
 end
 
 # Loading configuration
-data = {}
-data["version"] = "Motyl 1.00"
-data["updated"] = Time.now.strftime("%Y-%m-%dT%XZ")
-data["site"] = YAML.load_file("motyl.conf")
-data["feed"] = {}
-data["posts"] = []
-data["categories"] = {}
+data = {
+  "version" => "Motyl 1.00",
+  "updated" => Time.now.strftime("%Y-%m-%dT%XZ"),
+  "site" => YAML.load_file("motyl.conf"),
+  "posts" => [],
+  "categories" => {}
+}
 
 # Loading templates
 templates = {
