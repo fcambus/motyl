@@ -18,34 +18,34 @@ require 'mustache'
 require 'yaml'
 
 # Load and process Markdown file
-def loadMD(path)
+def markdown(path)
   return Kramdown::Document.new(File.read(path), syntax_highlighter: 'rouge').to_html
 end
 
 # Display status message
 def status(message)
-  puts("[" + Time.now.strftime("%X") + "] " + message)
+  puts('[' + Time.now.strftime('%X') + '] ' + message)
 end
 
 # Loading configuration
 data = {
-  "version" => "Motyl 1.00",
-  "updated" => Time.now.strftime("%Y-%m-%dT%XZ"),
-  "site" => YAML.load_file("motyl.conf"),
-  "posts" => [],
-  "categories" => {}
+  'version' => 'Motyl 1.00',
+  'updated' => Time.now.strftime('%Y-%m-%dT%XZ'),
+  'site' => YAML.load_file('motyl.conf'),
+  'posts' => [],
+  'categories' => {}
 }
 
 # Loading templates
 templates = {
-  "categories" => File.read("themes/templates/categories.mustache"),
-  "atom" => File.read("themes/templates/atom.mustache"),
-  "pages" => File.read("themes/templates/page.mustache"),
-  "posts" => File.read("themes/templates/post.mustache")
+  'categories' => File.read('themes/templates/categories.mustache'),
+  'atom' => File.read('themes/templates/atom.mustache'),
+  'pages' => File.read('themes/templates/page.mustache'),
+  'posts' => File.read('themes/templates/post.mustache')
 }
 
 class Mustache
-  self.template_path = "themes/templates/"
+  self.template_path = 'themes/templates/'
 end
 
 def render(directory, templates, data)
@@ -53,66 +53,66 @@ def render(directory, templates, data)
     next if file == '.' or file == '..'
     extension = File.extname(file)
 
-    if extension == ".md"
+    if extension == '.md'
       basename = File.basename(file, extension)
-      data["page"] = YAML.load_file(directory + "/" + basename + ".yaml")
-      data["page"]["content"] = Mustache.render(loadMD(directory + "/" + file), data)
-      data["page"]["url"] ||= basename + "/"
+      data['page'] = YAML.load_file(directory + '/' + basename + '.yaml')
+      data['page']['content'] = Mustache.render(markdown(directory + '/' + file), data)
+      data['page']['url'] ||= basename + '/'
 
-      status("Rendering " + data["page"]["url"])
+      status('Rendering ' + data['page']['url'])
 
-      if directory == "posts" then
-        data["page"]["datetime"] = DateTime.parse(data["page"]["date"])
+      if directory == 'posts'
+        data['page']['datetime'] = DateTime.parse(data['page']['date'])
 
-        data["posts"].push(data["page"])
+        data['posts'].push(data['page'])
 
-        data["page"]["categoryDisplay"] = []
+        data['page']['categoryDisplay'] = []
 
         # Populate category table
-        data["page"]["categories"].each do |category|
-          data["categories"][category] ||= []
-          data["categories"][category].push(data["page"])
-          data["page"]["categoryDisplay"].push({ "category" => category, "url" => data["site"]["categoryMap"][category]})
+        data['page']['categories'].each do |category|
+          data['categories'][category] ||= []
+          data['categories'][category].push(data['page'])
+          data['page']['categoryDisplay'].push({ 'category' => category, 'url' => data['site']['categoryMap'][category] })
         end
       end
 
-      Dir.mkdir("public/" + data["page"]["url"]) unless Dir.exist?("public/" + data["page"]["url"])
-      File.write("public/" + data["page"]["url"] + "index.html", Mustache.render(templates[directory], data))
+      Dir.mkdir('public/' + data['page']['url']) unless Dir.exist?('public/' + data['page']['url'])
+      File.write('public/' + data['page']['url'] + 'index.html', Mustache.render(templates[directory], data))
 
-      data["page"] = {}
+      data['page'] = {}
     end
   end
 end
 
 # Render posts
-Dir.mkdir("public") unless Dir.exist?("public")
-render("posts", templates, data)
+Dir.mkdir('public') unless Dir.exist?('public')
+render('posts', templates, data)
 
 # Sort post archives
-data["posts"].sort! { |a,b| b["date"] <=> a["date"] }
+data['posts'].sort! { |a, b| b['date'] <=> a['date'] }
 
 # Renger pages
-render("pages", templates, data)
+render('pages', templates, data)
 
 # Feed
-data["feed"] = data["posts"][0..20]
+data['feed'] = data['posts'][0..20]
 
-File.write("public/atom.xml", Mustache.render(templates["atom"], data))
-status("Rendering atom.xml")
-data["page"] = {}
+File.write('public/atom.xml', Mustache.render(templates['atom'], data))
+status('Rendering atom.xml')
+data['page'] = {}
 
 # Categories
-Dir.mkdir("public/categories") unless Dir.exist?("public/categories")
+Dir.mkdir('public/categories') unless Dir.exist?('public/categories')
 
-data["categories"].keys.each do |category|
-  category_url = data["site"]["categoryMap"][category] + "/"
+data['categories'].keys.each do |category|
+  category_url = data['site']['categoryMap'][category] + '/'
 
-  data["categories"][category].sort! { |a,b| b["date"] <=> a["date"] }
-  data["page"]["title"] = category
-  data["page"]["url"] = "categories/" + category_url
-  data["posts"] = data["categories"][category]
+  data['categories'][category].sort! { |a, b| b['date'] <=> a['date'] }
+  data['page']['title'] = category
+  data['page']['url'] = 'categories/' + category_url
+  data['posts'] = data['categories'][category]
 
-  Dir.mkdir("public/categories/" + category_url) unless Dir.exist?("public/categories/" + category_url)
-  File.write("public/categories/" + category_url + "index.html", Mustache.render(templates["categories"], data))
-  status("Rendering " + category_url)
+  Dir.mkdir('public/categories/' + category_url) unless Dir.exist?('public/categories/' + category_url)
+  File.write('public/categories/' + category_url + 'index.html', Mustache.render(templates['categories'], data))
+  status('Rendering ' + category_url)
 end
