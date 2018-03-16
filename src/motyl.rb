@@ -50,7 +50,7 @@ end
 
 def render(directory, templates, data)
   Dir.foreach(directory) do |file|
-    next if file == '.' or file == '..'
+    next if file == '.' || file == '..'
     extension = File.extname(file)
 
     if extension == '.md'
@@ -72,7 +72,7 @@ def render(directory, templates, data)
         data['page']['categories'].each do |category|
           data['categories'][category] ||= []
           data['categories'][category].push(data['page'])
-          data['page']['categoryDisplay'].push({ 'category' => category, 'url' => data['site']['categoryMap'][category] })
+          data['page']['categoryDisplay'].push('category' => category, 'url' => data['site']['categoryMap'][category])
         end
       end
 
