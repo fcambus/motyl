@@ -29,7 +29,7 @@ end
 
 # Loading configuration
 data = {
-  'version' => 'Motyl 1.00',
+  'version' => 'Motyl 1.0.0',
   'updated' => Time.now.strftime('%Y-%m-%dT%XZ'),
   'site' => YAML.load_file('motyl.conf'),
   'posts' => [],
