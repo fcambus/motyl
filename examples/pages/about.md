@@ -17,7 +17,7 @@ For the record, motyl means butterfly in Polish.
 
 ## Requirements
 
-Motyl requires Ruby and Make.
+Motyl requires Ruby.
 
 ### Ruby modules
 
@@ -45,7 +45,7 @@ and place the files in the `themes` directory.
 
 ## Usage
 
-Simply run `make` to build the site, it will generate posts and pages into
+Simply run `motyl` to build the site, it will generate posts and pages into
 the `public` directory, and will also copy static assets.
 
 ## License
