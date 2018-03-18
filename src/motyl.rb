@@ -6,13 +6,14 @@
 # https://github.com/fcambus/motyl                                            #
 #                                                                             #
 # Created: 2016-02-16                                                         #
-# Last Updated: 2018-03-13                                                    #
+# Last Updated: 2018-03-18                                                    #
 #                                                                             #
 # Motyl is released under the BSD 2-Clause license.                           #
 # See LICENSE file for details.                                               #
 #                                                                             #
 ###############################################################################
 
+require 'fileutils'
 require 'kramdown'
 require 'mustache'
 require 'yaml'
@@ -76,7 +77,7 @@ def render(directory, templates, data)
         end
       end
 
-      Dir.mkdir('public/' + data['page']['url']) unless Dir.exist?('public/' + data['page']['url'])
+      FileUtils.mkdir_p('public/' + data['page']['url'])
       File.write('public/' + data['page']['url'] + 'index.html', Mustache.render(templates[directory], data))
 
       data['page'] = {}
@@ -85,7 +86,6 @@ def render(directory, templates, data)
 end
 
 # Render posts
-Dir.mkdir('public') unless Dir.exist?('public')
 render('posts', templates, data)
 
 # Sort post archives
@@ -102,8 +102,6 @@ status('Rendering atom.xml')
 data['page'] = {}
 
 # Categories
-Dir.mkdir('public/categories') unless Dir.exist?('public/categories')
-
 data['categories'].keys.each do |category|
   category_url = data['site']['categoryMap'][category] + '/'
 
@@ -112,7 +110,7 @@ data['categories'].keys.each do |category|
   data['page']['url'] = 'categories/' + category_url
   data['posts'] = data['categories'][category]
 
-  Dir.mkdir('public/categories/' + category_url) unless Dir.exist?('public/categories/' + category_url)
+  FileUtils.mkdir_p('public/categories/' + category_url)
   File.write('public/categories/' + category_url + 'index.html', Mustache.render(templates['categories'], data))
   status('Rendering ' + category_url)
 end
