@@ -11,7 +11,8 @@ For the record, motyl means butterfly in Polish.
 - Minimal dependencies (only three gems)
 - Pages and posts written in Markdown
 - Templates are logic-less and use Mustache
-- Support for categories
+- Support for multiple categories per post
+- Syntax highlighting (using Rouge)
 - Customizable URLs (constructed from filename)
 - Atom feed generator
 
