@@ -118,6 +118,6 @@ end
 
 # Copy static assets
 status('Copying assets and static files')
-FileUtils.cp_r('themes/fonts', 'public');
-FileUtils.cp_r('themes/styles', 'public');
-FileUtils.cp_r('static', 'public');
+FileUtils.cp_r('themes/fonts', 'public')
+FileUtils.cp_r('themes/styles', 'public')
+FileUtils.cp_r('static', 'public')
