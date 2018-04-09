@@ -4,14 +4,14 @@ Motyl supports fenced code blocks.
 
 Here is an example showing a shell script:
 
-``` bash
+~~~ bash
 #!/bin/sh
 echo "Hello World!"
-```
+~~~
 
 Another example showing C code:
 
-``` clike
+~~~ c
 #include <stdio.h>
 
 int main() {
@@ -19,5 +19,5 @@ int main() {
 
 	return 0;
 }
-```
+~~~
 
