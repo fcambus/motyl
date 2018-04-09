@@ -37,17 +37,17 @@ data = {
   'categories' => {}
 }
 
+theme = 'themes/' + data['site']['theme'] + '/'
+
 # Loading templates
 templates = {
-  'categories' => File.read('themes/templates/categories.mustache'),
-  'atom' => File.read('themes/templates/atom.mustache'),
-  'pages' => File.read('themes/templates/page.mustache'),
-  'posts' => File.read('themes/templates/post.mustache')
+  'categories' => File.read(theme + 'templates/categories.mustache'),
+  'atom' => File.read(theme + 'templates/atom.mustache'),
+  'pages' => File.read(theme + 'templates/page.mustache'),
+  'posts' => File.read(theme + 'templates/post.mustache')
 }
 
-class Mustache
-  self.template_path = 'themes/templates/'
-end
+Mustache.template_path = theme + 'templates/'
 
 def render(directory, templates, data)
   Dir.foreach(directory) do |file|
@@ -118,6 +118,6 @@ end
 
 # Copy static assets
 status('Copying assets and static files')
-FileUtils.cp_r('themes/fonts', 'public')
-FileUtils.cp_r('themes/styles', 'public')
+FileUtils.cp_r(theme + 'fonts', 'public')
+FileUtils.cp_r(theme + 'styles', 'public')
 FileUtils.cp_r(Dir.glob('static/*'), 'public')
