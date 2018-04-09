@@ -7,11 +7,12 @@ For the record, motyl means butterfly in Polish.
 
 ## Features
 
-- Small and easy to understand code (only 94 sloc)
+- Small and easy to understand codebase
 - Minimal dependencies (only three gems)
 - Pages and posts written in Markdown
 - Templates are logic-less and use Mustache
-- Support for categories
+- Support for multiple categories per post
+- Syntax highlighting (using Rouge)
 - Customizable URLs (constructed from filename)
 - Atom feed generator
 
