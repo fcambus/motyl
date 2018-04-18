@@ -6,7 +6,7 @@
 # https://github.com/fcambus/motyl                                            #
 #                                                                             #
 # Created: 2016-02-16                                                         #
-# Last Updated: 2018-03-18                                                    #
+# Last Updated: 2018-04-18                                                    #
 #                                                                             #
 # Motyl is released under the BSD 2-Clause license.                           #
 # See LICENSE file for details.                                               #
@@ -20,7 +20,7 @@ require 'yaml'
 
 # Load and process Markdown file
 def markdown(path)
-  Kramdown::Document.new(File.read(path), syntax_highlighter: 'rouge').to_html
+  Kramdown::Document.new(File.read(path), smart_quotes: ["apos", "apos", "quot", "quot"], syntax_highlighter: 'rouge').to_html
 end
 
 # Display status message
