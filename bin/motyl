@@ -6,7 +6,7 @@
 # https://github.com/fcambus/motyl                                            #
 #                                                                             #
 # Created: 2016-02-16                                                         #
-# Last Updated: 2018-04-18                                                    #
+# Last Updated: 2018-04-19                                                    #
 #                                                                             #
 # Motyl is released under the BSD 2-Clause license.                           #
 # See LICENSE file for details.                                               #
@@ -63,7 +63,7 @@ def render(directory, templates, data)
       status('Rendering ' + data['page']['url'])
 
       if directory == 'posts'
-        data['page']['datetime'] = DateTime.parse(data['page']['date'])
+        data['page']['datetime'] = DateTime.parse(data['page']['date']).strftime('%Y-%m-%dT%XZ')
 
         data['posts'].push(data['page'])
 
