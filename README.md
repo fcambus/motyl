@@ -18,8 +18,6 @@ For the record, motyl means butterfly in Polish.
 
 ## Requirements
 
-Motyl requires Ruby.
-
 ### Ruby modules
 
 Motyl requires the following Ruby modules:
