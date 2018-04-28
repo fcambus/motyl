@@ -51,7 +51,8 @@ Mustache.template_path = theme + 'templates/'
 
 def render(directory, templates, data)
   Dir.foreach(directory) do |file|
-    next if file == '.' || file == '..'
+    next if ['.', '..'].include?(file)
+
     extension = File.extname(file)
 
     if extension == '.md'
