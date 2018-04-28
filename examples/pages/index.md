@@ -18,8 +18,6 @@ For the record, motyl means butterfly in Polish.
 
 ## Requirements
 
-Motyl requires Ruby.
-
 ### Ruby modules
 
 Motyl requires the following Ruby modules:
@@ -42,7 +40,7 @@ starting point.
 ### Installing a theme
 
 Clone the [Chrysalide](https://github.com/fcambus/chrysalide) theme repository
-and place the files in the `themes` directory.
+and place it in the `themes` directory.
 
 ## Usage
 
