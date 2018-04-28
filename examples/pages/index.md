@@ -30,7 +30,8 @@ Installing dependencies via gem:
 
 	gem install kramdown mustache rouge
 
-Alternatively, those modules can be installed directly using binary packages.
+Alternatively, those modules can be installed directly via the operating
+system's package manager.
 
 ## Configuration
 
