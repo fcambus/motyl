@@ -118,6 +118,5 @@ end
 
 # Copy static assets
 status('Copying assets and static files')
-FileUtils.cp_r(theme + 'fonts', 'public')
-FileUtils.cp_r(theme + 'styles', 'public')
+FileUtils.cp_r(Dir.glob(theme + 'assets/*'), 'public')
 FileUtils.cp_r(Dir.glob('assets/*'), 'public')
