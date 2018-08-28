@@ -83,7 +83,8 @@ def render(directory, templates, data)
       end
 
       FileUtils.mkdir_p('public/' + data['page']['url'])
-      File.write('public/' + data['page']['url'] + 'index.html', Mustache.render(templates[directory], data))
+      File.write('public/' + data['page']['url'] + 'index.html',
+                 Mustache.render(templates[directory], data))
 
       data['page'] = {}
     end
@@ -117,7 +118,8 @@ data['categories'].keys.each do |category|
   data['posts'] = data['categories'][category]
 
   FileUtils.mkdir_p('public/categories/' + category_url)
-  File.write('public/categories/' + category_url + 'index.html', Mustache.render(templates['categories'], data))
+  File.write('public/categories/' + category_url + 'index.html',
+             Mustache.render(templates['categories'], data))
   status('Rendering ' + category_url)
 end
 
