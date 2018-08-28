@@ -6,7 +6,7 @@
 # https://github.com/fcambus/motyl                                            #
 #                                                                             #
 # Created: 2016-02-16                                                         #
-# Last Updated: 2018-04-28                                                    #
+# Last Updated: 2018-08-28                                                    #
 #                                                                             #
 # Motyl is released under the BSD 2-Clause license.                           #
 # See LICENSE file for details.                                               #
@@ -17,6 +17,10 @@ require 'fileutils'
 require 'kramdown'
 require 'mustache'
 require 'yaml'
+
+# Enforce UTF-8 character encoding
+Encoding.default_internal = Encoding::UTF_8
+Encoding.default_external = Encoding::UTF_8
 
 # Load and process Markdown file
 def markdown(path)
