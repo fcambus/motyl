@@ -6,7 +6,7 @@
 # https://github.com/fcambus/motyl                                            #
 #                                                                             #
 # Created: 2016-02-16                                                         #
-# Last Updated: 2018-08-28                                                    #
+# Last Updated: 2018-10-18                                                    #
 #                                                                             #
 # Motyl is released under the BSD 2-Clause license.                           #
 # See LICENSE file for details.                                               #
@@ -24,7 +24,11 @@ Encoding.default_external = Encoding::UTF_8
 
 # Load and process Markdown file
 def markdown(path)
-  Kramdown::Document.new(File.read(path), smart_quotes: %w[apos apos quot quot], syntax_highlighter: 'rouge').to_html
+  Kramdown::Document.new(
+    File.read(path),
+    smart_quotes: %w[apos apos quot quot],
+    syntax_highlighter: 'rouge'
+  ).to_html
 end
 
 # Display status message
@@ -62,13 +66,18 @@ def render(directory, templates, data)
     if extension == '.md'
       basename = File.basename(file, extension)
       data['page'] = YAML.load_file(directory + '/' + basename + '.yaml')
-      data['page']['content'] = Mustache.render(markdown(directory + '/' + file), data)
+      data['page']['content'] = Mustache.render(
+        markdown(directory + '/' + file),
+        data
+      )
       data['page']['url'] ||= basename + '/'
 
       status('Rendering ' + data['page']['url'])
 
       if directory == 'posts'
-        data['page']['datetime'] = DateTime.parse(data['page']['date']).strftime('%Y-%m-%dT%XZ')
+        data['page']['datetime'] = DateTime.parse(
+          data['page']['date']).strftime('%Y-%m-%dT%XZ'
+        )
 
         data['posts'].push(data['page'])
 
@@ -78,7 +87,10 @@ def render(directory, templates, data)
         data['page']['categories'].each do |category|
           data['categories'][category] ||= []
           data['categories'][category].push(data['page'])
-          data['page']['categoryDisplay'].push('category' => category, 'url' => data['site']['categoryMap'][category])
+          data['page']['categoryDisplay'].push(
+            'category' => category,
+            'url' => data['site']['categoryMap'][category]
+          )
         end
       end
 
