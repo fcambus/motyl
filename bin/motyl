@@ -24,7 +24,7 @@ Encoding.default_external = Encoding::UTF_8
 
 # Load and process Markdown file
 def markdown(path)
-  Kramdown::Document.new(File.read(path), smart_quotes: ['apos', 'apos', 'quot', 'quot'], syntax_highlighter: 'rouge').to_html
+  Kramdown::Document.new(File.read(path), smart_quotes: %w[apos apos quot quot], syntax_highlighter: 'rouge').to_html
 end
 
 # Display status message
