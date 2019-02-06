@@ -1,0 +1,3 @@
+[submodule "examples/themes/chrysalide"]
+	path = examples/themes/chrysalide
+	url = git@github.com:fcambus/chrysalide.git
