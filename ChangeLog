@@ -1,3 +1,9 @@
+Motyl 1.0.2 (2019-05-07)
+
+- Add require 'date', which allows Motyl to run with Ruby 2.5+
+
+
+
 Motyl 1.0.1 (2018-10-18)
 
 - Enforce UTF-8 character encoding
