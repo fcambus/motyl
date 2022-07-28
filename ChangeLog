@@ -1,3 +1,13 @@
+Motyl 1.0.3 (2022-07-28)
+
+- Fix an off-by-one error, we want 20 posts in the Atom feed
+- Raise the default to 30 posts in the Atom feed
+- Remove unused feedItems directive from motyl.conf
+- Add Motyl ASCii logo header (Thanks H7!)
+- Add SPDX short license identifier in source file
+
+
+
 Motyl 1.0.2 (2019-05-07)
 
 - Add require 'date', which allows Motyl to run with Ruby 2.5+

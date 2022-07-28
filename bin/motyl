@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 #
-# Motyl 1.0.2
+# Motyl 1.0.3
 # Copyright (c) 2016-2022, Frederic Cambus
 # https://github.com/fcambus/motyl
 #
@@ -40,7 +40,7 @@ end
 
 # Loading configuration
 data = {
-  'version' => 'Motyl 1.0.2',
+  'version' => 'Motyl 1.0.3',
   'updated' => Time.now.strftime('%Y-%m-%dT%XZ'),
   'site' => YAML.load_file('motyl.conf'),
   'posts' => [],
